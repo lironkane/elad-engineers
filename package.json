@@ -2,8 +2,11 @@
     "name": "my-elad-project",
     "version": "1.0.0",
     "private": true,
-    "workspaces":[
+    "workspaces": [
         "client",
         "server"
-      ]
-  }
+    ],
+    "dependencies": {
+        "react-icons": "^5.5.0"
+    }
+}
