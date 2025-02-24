@@ -1,9 +1,6 @@
 // src/pages/Home.jsx
-import React, { useState, useEffect } from 'react'; // useRef הוסר כי הוא לא בשימוש
-import { motion } from 'framer-motion';
-// שים לב לייבוא הנכון מ lucide-react:
+import React from 'react'; // useRef הוסר כי הוא לא בשימוש
 import { Building2, Ruler, BookOpen, Handshake, FileSearch, ClipboardCheck, HeartHandshake, MoveRight, Award, ChevronRight, ArrowRight, Shield } from 'lucide-react';
-import { FaCheckCircle, FaTools, FaChartLine, FaUserShield, FaFileAlt, FaHeadset, FaMoneyBill } from 'react-icons/fa'; // הספריות הנכונות
 
 
 // שירותים
