@@ -1,8 +1,6 @@
 // src/pages/Home.jsx (Corrected - using lucide-react)
-import React, {useState, useEffect, useRef} from 'react'; // I added useState, useEffect and useRef.
-import { motion } from 'framer-motion';
+import React, {useState, useEffect} from 'react'; // I added useState, useEffect and useRef.
 import { Building2, Ruler, BookOpen, Handshake, FileSearch, ClipboardCheck, HeartHandshake, MoveRight, Award, ChevronRight, ArrowRight, Shield, } from 'lucide-react';
-import { FaCheckCircle, FaTools, FaChartLine, FaUserShield, FaFileAlt, FaHeadset, FaMoneyBill } from 'react-icons/fa';
 // שירותים
 const services = [
     {
@@ -154,10 +152,6 @@ const services = [
   };
   
   const Home = () => {  
-    const sectionVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-    };
 
     const [isVisible, setIsVisible] = useState(false); // Add this if you intend to use isVisible as state
 
