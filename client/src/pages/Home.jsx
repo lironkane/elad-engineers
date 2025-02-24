@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Building2, Ruler, BookOpen, Shield, Clock, Award, ChevronRight, ArrowRight, Handshake, FileSearch, ClipboardCheck, HeartHandshake, ChevronLeft, MoveRight } from 'lucide-react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { FaCheckCircle, FaTools, FaChartLine, FaUserShield, FaFileAlt, FaHeadset, FaMoneyBill } from 'react-icons/fa';
 // שירותים
 const services = [
     {
@@ -151,9 +151,7 @@ const services = [
     );
   };
   
-  const Home = () => {
-    const [isVisible, setIsVisible] = useState(false);
-  
+  const Home = () => {  
     useEffect(() => {
       setIsVisible(true);
     }, []);
