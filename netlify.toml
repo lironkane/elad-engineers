@@ -1,14 +1,14 @@
 [build]
-  command = "npm install && npm run build --workspace=client"  # פקודת ה-build
-  publish = "client/build"    # התיקייה שמכילה את האתר הבנוי
+  command = "CI=false npm install && npm run build --workspace=client" # <-- Add CI=false
+  publish = "client/build"
 
 [[redirects]]
-  from = "/api/*"         # כל בקשה שמתחילה ב-/api
-  to = "http://localhost:3001/api/:splat"   # תופנה ל-backend (בפיתוח!)
-  status = 200            # קוד 200 (OK) - חשוב ל-proxy
-  force = true # אם יש התנגשות, אז שה redirect הזה ינצח
+  from = "/api/*"
+  to = "http://localhost:3001/api/:splat"  # Or your backend's production URL
+  status = 200
+  force = true
 
 [[redirects]]
-  from = "/*"             # כל נתיב אחר
-  to = "/index.html"     # הגש את index.html (ל-SPA)
+  from = "/*"
+  to = "/index.html"
   status = 200
