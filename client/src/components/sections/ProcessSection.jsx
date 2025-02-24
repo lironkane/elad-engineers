@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import {
   ArrowRightCircle,
   ArrowDownCircle,
@@ -7,8 +7,7 @@ import {
   ClipboardCheck,
   HeartHandshake,
   Settings,
-  Phone, // Keep these, they are used here
-  MessageCircle, // Keep these
+
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
