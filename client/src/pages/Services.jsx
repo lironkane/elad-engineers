@@ -12,17 +12,8 @@ import {
   FaHouseDamage,
   FaHome,
   FaBuilding,
-  FaRuler,
-  FaPhone,
-  FaEnvelope,
-  FaMapMarkerAlt,
   FaHandshake,
-  FaStar,
   FaChevronDown,
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
-  FaWhatsapp
 } from 'react-icons/fa';
 
 import { BiBuildingHouse } from 'react-icons/bi';
