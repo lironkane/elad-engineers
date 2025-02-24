@@ -403,7 +403,7 @@ const EngineeringTestimonialsGallery = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-primary-50 px-3 py-1 rounded-full text-primary-700 text-sm font-medium mb-4">
             <Check className="w-4 h-4 mr-1" />
-            המלצות מלקוחות אמיתיים
+            הלקוחות שלנו
           </div>
           <h2 className="text-4xl font-bold text-secondary-900">חוות דעת מלקוחותינו</h2>
           <p className="mt-4 text-xl text-secondary-600">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   ArrowRightCircle,
   ArrowDownCircle,
@@ -6,9 +6,76 @@ import {
   FileSearch,
   ClipboardCheck,
   HeartHandshake,
-  Settings
+  Settings,
+  Phone, // Keep these, they are used here
+  MessageCircle, // Keep these
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const AnimatedClosingStatement = () => {
+    // המשפט המלא
+    const sentence = "ניסיוננו רב השנים מאפשר לנו ללוות אתכם בשלבי הפרויקט השונים – מהייעוץ הראשוני ועד השלמתו, תוך חיסכון בזמן ובעלויות.";
+  
+    const [currentWord, setCurrentWord] = React.useState(''); // מחזיק את הטקסט הנוכחי
+    const [charIndex, setCharIndex] = React.useState(0);     // אינדקס התו הנוכחי
+  
+    React.useEffect(() => {
+      const typeInterval = setInterval(() => {
+        if (charIndex < sentence.length) {
+          setCurrentWord((prevWord) => prevWord + sentence[charIndex]);
+          setCharIndex((prevIndex) => prevIndex + 1);
+        } else {
+          clearInterval(typeInterval); // עצור כשהגענו לסוף המשפט
+        }
+      }, 30); // מהירות ההקלדה
+  
+      return () => clearInterval(typeInterval);
+    }, [charIndex, sentence]); // תלוי ב-charIndex וב-sentence
+  
+  
+    // אנימציות Framer Motion (ללא שינוי)
+    const containerVariants = {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { duration: 0.8, ease: "easeOut" } // Fade-in
+      }
+    };
+  
+    const iconVariants = {
+      hidden: { opacity: 0, rotate: 0 },
+      visible: {
+        opacity: 1,
+        rotate: 360,
+        transition: { duration: 8, repeat: Infinity, ease: "linear" } // סיבוב איטי
+      }
+    };
+  
+    return (
+      <motion.div
+        className="mt-20 relative text-center"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        {/* רקע */}
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-100/50 to-blue-100/50 -z-10 rounded-3xl" />
+  
+        {/* אייקון */}
+        <motion.div
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-600/50"
+          variants={iconVariants}
+        >
+          <Settings className="w-16 h-16" />
+        </motion.div>
+  
+        {/* טקסט */}
+        <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-800 max-w-4xl mx-auto px-4 py-8 relative">
+          {currentWord}
+        </p>
+      </motion.div>
+    );
+  };
 
 // שלבי התהליך (ללא מספרים)
 const steps = [
@@ -19,8 +86,8 @@ const steps = [
     details: [
       'פגישה עם מהנדס בכיר',
       'הבנת דרישות מדויקת',
-      'הערכת עלויות ולוחות זמנים'
-    ]
+      'הערכת עלויות ולוחות זמנים',
+    ],
   },
   {
     icon: <FileSearch className="w-10 h-10 text-primary-600" />,
@@ -29,8 +96,8 @@ const steps = [
     details: [
       'בדיקות מקיפות של המבנה',
       'שימוש בציוד מתקדם',
-      'תיעוד מפורט של ממצאים'
-    ]
+      'תיעוד מפורט של ממצאים',
+    ],
   },
   {
     icon: <ClipboardCheck className="w-10 h-10 text-primary-600" />,
@@ -39,8 +106,8 @@ const steps = [
     details: [
       'ניתוח מעמיק של הממצאים',
       'הכנת דוח מפורט ומקצועי',
-      'פירוט המלצות לתיקון'
-    ]
+      'פירוט המלצות לתיקון',
+    ],
   },
   {
     icon: <HeartHandshake className="w-10 h-10 text-primary-600" />,
@@ -49,9 +116,9 @@ const steps = [
     details: [
       'ליווי בתהליך התיקונים',
       'פיקוח על ביצוע העבודות',
-      'זמינות מלאה לשאלות'
-    ]
-  }
+      'זמינות מלאה לשאלות',
+    ],
+  },
 ];
 
 // אנימציות כניסה (Fade+Slide) לכרטיסים
@@ -60,8 +127,8 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' }
-  }
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
 };
 
 // אנימציית Wiggle לחצים
@@ -72,10 +139,10 @@ const arrowVariants = {
     scale: 1.2,
     transition: {
       repeat: Infinity,
-      repeatType: "reverse",
+      repeatType: 'reverse',
       duration: 0.7,
-    }
-  }
+    },
+  },
 };
 
 const ProcessSection = () => {
@@ -90,9 +157,9 @@ const ProcessSection = () => {
           opacity: 1,
           transition: {
             staggerChildren: 0.1,
-            delayChildren: 0.2
-          }
-        }
+            delayChildren: 0.2,
+          },
+        },
       }}
     >
       {/* רקע של צורות הנדסיות (Arcs) בצורה חוזרת ועדינה */}
@@ -101,7 +168,8 @@ const ProcessSection = () => {
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='60' cy='60' r='58' fill='none' stroke='%23007bff' stroke-width='2' stroke-opacity='0.08'/%3E%3Ccircle cx='60' cy='60' r='40' fill='none' stroke='%23007bff' stroke-width='2' stroke-opacity='0.08'/%3E%3Ccircle cx='60' cy='60' r='20' fill='none' stroke='%23007bff' stroke-width='2' stroke-opacity='0.08'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
-          backgroundSize: '120px 120px'
+          backgroundSize: '120px 120px',
+          animation: 'scroll 30s linear infinite',
         }}
       />
 
@@ -111,7 +179,6 @@ const ProcessSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        
         {/* כותרת */}
         <div className="text-center mb-16">
           <motion.h2
@@ -168,7 +235,7 @@ const ProcessSection = () => {
                 )}
 
                 {/* כרטיס שלב */}
-                <div className="bg-white w-full rounded-2xl p-6 relative z-10 group hover:shadow-lg transition-all duration-300 border border-gray-100">
+                <div className="bg-white w-full rounded-2xl p-6 relative z-10 group hover:shadow-lg transition-all duration-300 border border-gray-100 shadow-sm">
                   <div className="text-center mb-6">
                     <div className="w-16 h-16 mx-auto bg-primary-50 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary-100 transition-colors duration-300">
                       {step.icon}
@@ -181,12 +248,22 @@ const ProcessSection = () => {
                     </p>
                   </div>
 
-                  {/* פירוט נוסף (Bullet Points) עם מרווח גדול יותר */}
-                  <div className="space-y-3">
+                  {/* פירוט נוסף (Bullet Points) - גרסה משופרת ליישור מושלם */}
+                  <div className="space-y-4">
                     {step.details.map((detail, idx) => (
-                      <div key={idx} className="flex items-start text-gray-700">
-                        <div className="mt-1 mr-3 w-2 h-2 bg-primary-500 rounded-full" />
-                        <span className="text-sm leading-relaxed">{detail}</span>
+                      <div
+                        key={idx}
+                        className="relative flex items-center text-gray-700 rtl"
+                      >
+                        {' '}
+                        {/* שמרתי על flex ו-items-center */}
+                        {/* בולט - עכשיו אבסולוטי */}
+                        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-gradient-to-r from-primary-400 to-primary-600 shadow-sm"></div>
+                        <span className="text-sm leading-relaxed pr-6">
+                          {' '}
+                          {/* padding ימני */}
+                          {detail}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -197,23 +274,34 @@ const ProcessSection = () => {
         </div>
 
         {/* הערה אחרונה */}
-        <div className="mt-12 text-center">
-          <p className="text-gray-700 max-w-2xl mx-auto">
-            ניסיוננו רב השנים מאפשר לנו ללוות אתכם בשלבי הפרויקט השונים – 
-            מהייעוץ הראשוני ועד השלמתו, תוך חיסכון בזמן ובעלויות.
-          </p>
-        </div>
+        <AnimatedClosingStatement />
       </div>
 
-      {/* אם תרצה, אפשר להוסיף @keyframes scroll לרקע */}
+      {/* הוספת אנימציית רקע */}
       <style jsx>{`
         @keyframes scroll {
-          from { background-position: 0 0; }
-          to { background-position: 60px 60px; }
+          from {
+            background-position: 0 0;
+          }
+          to {
+            background-position: 120px 120px;
+          }
+        }
+        .animate-spin-slow {
+          animation: spin 8s linear infinite;
+        }
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </motion.div>
   );
 };
+
 
 export default ProcessSection;

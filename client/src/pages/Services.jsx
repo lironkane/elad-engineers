@@ -34,17 +34,16 @@ const EngineeringBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
       <div className="absolute top-0 left-0 w-full h-full">
-        {/* רשת קווים אופקיים ואנכיים - מעין "תוכנית הנדסית" */}
+        {/* רשת קווים - מעין "תוכנית הנדסית" */}
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#007BFF" strokeWidth="0.5" />
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#007BFF" strokeWidth="0.5" />
             </pattern>
-            <pattern id="blueprint" width="400" height="400" patternUnits="userSpaceOnUse">
-              <circle cx="200" cy="200" r="50" fill="none" stroke="#007BFF" strokeWidth="0.5" />
-              <rect x="150" y="150" width="100" height="100" fill="none" stroke="#007BFF" strokeWidth="0.5" />
-              <line x1="0" y1="200" x2="400" y2="200" stroke="#007BFF" strokeWidth="0.5" strokeDasharray="5,5" />
-              <line x1="200" y1="0" x2="200" y2="400" stroke="#007BFF" strokeWidth="0.5" strokeDasharray="5,5" />
+            <pattern id="blueprint" width="200" height="200" patternUnits="userSpaceOnUse">
+              <circle cx="100" cy="100" r="25" fill="none" stroke="#007BFF" strokeWidth="0.5" />
+              <line x1="0" y1="100" x2="200" y2="100" stroke="#007BFF" strokeWidth="0.5" strokeDasharray="5,5" />
+              <line x1="100" y1="0" x2="100" y2="200" stroke="#007BFF" strokeWidth="0.5" strokeDasharray="5,5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -52,22 +51,15 @@ const EngineeringBackground = () => {
         </svg>
       </div>
       
-      {/* אנימציית מדידות נעות */}
-      {[...Array(5)].map((_, i) => (
+      {/* אנימציית מדידות נעות - רק 2 במקום 5 */}
+      {[...Array(2)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute h-px bg-primary-400"
-          style={{ 
-            top: `${20 + i * 15}%`, 
-            left: 0,
-            width: '100%'
-          }}
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-            scaleX: [0, 1, 0],
-          }}
+          style={{ top: `${30 + i * 20}%`, left: 0, width: '100%' }}
+          animate={{ opacity: [0.1, 0.3, 0.1], scaleX: [0, 1, 0] }}
           transition={{
-            duration: 10,
+            duration: 8,
             repeat: Infinity,
             delay: i * 2,
             repeatType: 'reverse',
@@ -76,30 +68,18 @@ const EngineeringBackground = () => {
         />
       ))}
       
-      {/* מעגלי מדידה */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={`circle-${i}`}
-          className="absolute rounded-full border border-primary-400"
-          style={{ 
-            top: `${30 + i * 20}%`, 
-            left: `${20 + i * 20}%`,
-            width: '150px',
-            height: '150px'
-          }}
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            delay: i * 5,
-            repeatType: 'reverse',
-            ease: 'easeInOut'
-          }}
-        />
-      ))}
+      {/* מעגל מדידה אחד במקום 3 */}
+      <motion.div
+        className="absolute rounded-full border border-primary-400"
+        style={{ top: '40%', left: '30%', width: '100px', height: '100px' }}
+        animate={{ opacity: [0.1, 0.3, 0.1], scale: [0, 1.2, 0] }}
+        transition={{
+          duration: 10, 
+          repeat: Infinity,
+          repeatType: 'reverse',
+          ease: 'easeInOut'
+        }}
+      />
     </div>
   );
 };
@@ -252,7 +232,7 @@ const StatsSection = () => {
   
   const stats = [
     { number: "1000+", text: "פרויקטים שהושלמו" },
-    { number: "97%", text: "שביעות רצון לקוחות" },
+    { number: "24/7", text: "זמינות" },
     { number: "15+", text: "שנות ניסיון" },
     { number: "50+", text: "קבלנים ויזמים שעובדים איתנו" }
   ];
@@ -325,28 +305,7 @@ const BedekBait = () => {
     <div className="min-h-screen font-heebo bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
       {/* רקע הנדסי אנימטיבי */}
       <EngineeringBackground />
-      
-      <motion.header
-        style={{ opacity: headerOpacity, scale: headerScale }}
-        className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-200 py-4"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div className="flex items-center space-x-2 space-x-reverse">
-            <FaRuler className="text-primary-500 ml-2" size={24} />
-            <h1 className="text-2xl font-rubik font-bold bg-gradient-to-l from-primary-600 to-accent-600 text-transparent bg-clip-text">
-              בדק בית מקצועי
-            </h1>
-          </div>
-          
-          <nav className="hidden md:flex items-center space-x-6 space-x-reverse text-secondary-800">
-            <a href="#what-is" className="hover:text-primary-600 transition-colors">מה כולל?</a>
-            <a href="#services" className="hover:text-primary-600 transition-colors">סוגי נכסים</a>
-            <a href="#contact" className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md transition-colors">צור קשר</a>
-          </nav>
-        </div>
-      </motion.header>
-      
-      <main className="relative z-10 pt-10">
+      <main className="relative z-10 pt-5">
         {/* כותרת ראשית עם אנימציה */}
         <motion.section
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-right"
@@ -389,53 +348,6 @@ const BedekBait = () => {
                 <button className="px-6 py-3 bg-white border border-primary-500 text-primary-600 hover:bg-primary-50 rounded-lg shadow-md hover:shadow-lg transition duration-300 font-medium">
                   למידע נוסף
                 </button>
-              </motion.div>
-            </div>
-            
-            <div className="lg:col-span-2">
-              <motion.div 
-                className="relative aspect-square max-w-md w-full mx-auto"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  delay: 0.3, 
-                  duration: 0.8,
-                  type: "spring",
-                  stiffness: 100
-                }}
-              >
-                <div className="absolute inset-0 rounded-full bg-primary-100 opacity-60 animate-pulse"></div>
-                <div className="absolute inset-4 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 opacity-40"></div>
-                <div className="absolute inset-8 rounded-full bg-white shadow-xl"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <FaRuler size={80} className="text-primary-600 transform -rotate-45" />
-                </div>
-                
-                {/* קווי מדידה אנימטיביים */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute bg-primary-500"
-                    style={{
-                      height: '2px',
-                      width: '100px',
-                      top: '50%',
-                      left: '50%',
-                      transformOrigin: 'left center',
-                      transform: `rotate(${i * 90}deg) translateX(0)`,
-                    }}
-                    animate={{
-                      scaleX: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i,
-                      repeatType: 'reverse',
-                      ease: 'easeInOut',
-                    }}
-                  />
-                ))}
               </motion.div>
             </div>
           </div>
@@ -534,11 +446,6 @@ const BedekBait = () => {
                 transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
               />
             </motion.div>
-            <div className="flex justify-between text-sm text-secondary-500 mt-1">
-              <span>0%</span>
-              <span>87% מהלקוחות מדווחים על חיסכון כספי משמעותי</span>
-              <span>100%</span>
-            </div>
           </motion.div>
         </section>
 
@@ -663,117 +570,7 @@ const BedekBait = () => {
   </button>
 </div>
 
-{/* סרגל התקדמות ויזואלי */}
-<div className="mt-12">
-  <h3 className="text-lg font-bold text-secondary-900 mb-3">הלקוחות שלנו מדווחים על:</h3>
-  
-  <div className="space-y-4">
-    <div>
-      <div className="flex justify-between mb-1 text-sm">
-        <span>חיסכון כספי משמעותי</span>
-        <span className="font-bold">92%</span>
-      </div>
-      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-        <div className="h-full bg-accent-500" style={{ width: '92%' }}></div>
-      </div>
-    </div>
-    
-    <div>
-      <div className="flex justify-between mb-1 text-sm">
-        <span>שיפור בתנאי ההסכם מול הקבלן</span>
-        <span className="font-bold">87%</span>
-      </div>
-      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-        <div className="h-full bg-accent-500" style={{ width: '87%' }}></div>
-      </div>
-    </div>
-    
-    <div>
-      <div className="flex justify-between mb-1 text-sm">
-        <span>שקט נפשי וביטחון בהחלטת הרכישה</span>
-        <span className="font-bold">95%</span>
-      </div>
-      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-        <div className="h-full bg-accent-500" style={{ width: '95%' }}></div>
-      </div>
-    </div>
-  </div>
-  
-  <p className="text-secondary-600 mt-4 text-sm">* בהתבסס על סקר שביעות רצון שנערך בקרב 500 לקוחות בשנה האחרונה</p>
-</div>
 
-{/* חלק טסטימוניאלס - המלצות לקוחות */}
-<div className="mt-16">
-  <h3 className="text-2xl font-rubik font-bold text-secondary-900 mb-6 text-center">מה הלקוחות שלנו אומרים</h3>
-  
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-      <div className="flex items-center mb-4">
-        <div className="h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center ml-3">
-          <span className="text-primary-700 font-bold">ד"ר</span>
-        </div>
-        <div>
-          <h4 className="font-bold text-secondary-900">ד"ר יעל כהן</h4>
-          <p className="text-sm text-secondary-600">תל אביב, דירה חדשה מקבלן</p>
-        </div>
-      </div>
-      <p className="text-secondary-700 leading-relaxed">
-        "הבדיקה המקצועית חסכה לנו עשרות אלפי שקלים בעלויות תיקון. איתרו ליקויי איטום שהיו בלתי נראים לעין והקבלן תיקן הכל לפני האכלוס."
-      </p>
-      <div className="mt-4 flex">
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-      </div>
-    </div>
-    
-    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-      <div className="flex items-center mb-4">
-        <div className="h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center ml-3">
-          <span className="text-primary-700 font-bold">א"מ</span>
-        </div>
-        <div>
-          <h4 className="font-bold text-secondary-900">אלון מזרחי</h4>
-          <p className="text-sm text-secondary-600">חיפה, דירת יד שניה</p>
-        </div>
-      </div>
-      <p className="text-secondary-700 leading-relaxed">
-        "הדוח המפורט היה נכס אדיר במשא ומתן. הצלחנו להוריד את מחיר הדירה ב-8% בזכות הממצאים המקצועיים. שירות מעולה ומשתלם."
-      </p>
-      <div className="mt-4 flex">
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-      </div>
-    </div>
-    
-    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-      <div className="flex items-center mb-4">
-        <div className="h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center ml-3">
-          <span className="text-primary-700 font-bold">נ"ל</span>
-        </div>
-        <div>
-          <h4 className="font-bold text-secondary-900">נופר לוי</h4>
-          <p className="text-sm text-secondary-600">ירושלים, נכס מסחרי</p>
-        </div>
-      </div>
-      <p className="text-secondary-700 leading-relaxed">
-        "המקצועיות ניכרת בכל שלב. המהנדס גילה בעיות חשמל שיכלו להוות סכנה אמיתית לעסק. הליווי בתהליך התיקונים היה יוצא מן הכלל."
-      </p>
-      <div className="mt-4 flex">
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-      </div>
-    </div>
-  </div>
-</div>
 
 {/* חלק שאלות נפוצות */}
 <div className="mt-16">
@@ -829,90 +626,6 @@ const BedekBait = () => {
     </div>
   </div>
 </div>
-
-{/* חלק תחתון עם CTA סופי */}
-<div className="mt-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl shadow-xl p-8 text-white text-center">
-  <h3 className="text-2xl font-rubik font-bold mb-4">מוכנים לקבל שקט נפשי לגבי הנכס שלכם?</h3>
-  <p className="mb-6 max-w-2xl mx-auto">
-    צוות המהנדסים המקצועי שלנו נמצא כאן כדי לעזור לכם לקבל החלטות מושכלות ולחסוך זמן וכסף. בדק בית איכותי הוא ההשקעה החכמה והמשתלמת ביותר שתעשו בתהליך רכישת הנכס.
-  </p>
-  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-    <button className="px-6 py-3 bg-white text-primary-700 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 font-medium">
-      תיאום בדיקה עכשיו
-    </button>
-    <button className="px-6 py-3 bg-transparent border border-white text-white hover:bg-white/10 rounded-lg transition duration-300 font-medium">
-      שיחה עם מהנדס
-    </button>
-  </div>
-</div>
-
-{/* פוטר */}
-<footer className="mt-16 pt-12 border-t border-gray-200">
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-4">בדק בית מקצועי</h4>
-      <p className="text-secondary-700">
-        שירותי בדיקה הנדסית מקצועית לכל סוגי הנכסים - דירות חדשות, יד שנייה ונכסים מסחריים.
-      </p>
-    </div>
-    
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-4">איזורי שירות</h4>
-      <ul className="space-y-2 text-secondary-700">
-        <li>תל אביב והמרכז</li>
-        <li>ירושלים והסביבה</li>
-        <li>חיפה והצפון</li>
-        <li>באר שבע והדרום</li>
-      </ul>
-    </div>
-    
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-4">צור קשר</h4>
-      <ul className="space-y-2 text-secondary-700">
-        <li className="flex items-center">
-          <FaPhone className="ml-2" size={14} />
-          <span dir="ltr">03-1234567</span>
-        </li>
-        <li className="flex items-center">
-          <FaEnvelope className="ml-2" size={14} />
-          <span>info@bedek-bait.co.il</span>
-        </li>
-        <li className="flex items-center">
-          <FaMapMarkerAlt className="ml-2" size={14} />
-          <span>רחוב הבונים 10, תל אביב</span>
-        </li>
-      </ul>
-    </div>
-    
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-4">שעות פעילות</h4>
-      <ul className="space-y-2 text-secondary-700">
-        <li>ימים א'-ה': 08:00-18:00</li>
-        <li>יום ו': 08:00-13:00</li>
-        <li>שבת: סגור</li>
-      </ul>
-      
-      <div className="mt-4 flex space-x-4">
-        <a href="#" className="text-primary-600 hover:text-primary-800">
-          <FaFacebook size={20} />
-        </a>
-        <a href="#" className="text-primary-600 hover:text-primary-800">
-          <FaInstagram size={20} />
-        </a>
-        <a href="#" className="text-primary-600 hover:text-primary-800">
-          <FaLinkedin size={20} />
-        </a>
-        <a href="#" className="text-primary-600 hover:text-primary-800">
-          <FaWhatsapp size={20} />
-        </a>
-      </div>
-    </div>
-  </div>
-  <div className="py-4 border-t border-gray-200 text-center text-secondary-600 text-sm">
-    <p>© {new Date().getFullYear()} בדק בית מקצועי. כל הזכויות שמורות.</p>
-  </div>
-</footer>
-
               </motion.div>
             </motion.div>
           </div>
