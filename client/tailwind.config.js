@@ -49,6 +49,10 @@ module.exports = {
         },
       },
       keyframes: {
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
         'gradient-x': {
           '0%, 100%': { 'background-position': '0% 50%' },
           '50%': { 'background-position': '100% 50%' },
@@ -56,6 +60,7 @@ module.exports = {
       },
       animation: {
         'gradient-x': 'gradient-x 8s ease-in-out infinite',
+        'spin-slow': 'spin-slow 20s linear infinite',
       },
     },
     plugins: [
