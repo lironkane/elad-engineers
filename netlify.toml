@@ -1,6 +1,7 @@
 [build]
   command = "CI=false npm install && npm run build --workspace=client" # <-- Add CI=false
   publish = "client/build"
+  environment = { CI = "false" }
 
 [[redirects]]
   from = "/api/*"
