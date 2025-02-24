@@ -628,41 +628,6 @@ const BedekBait = () => {
         </section>
       </main>
       
-      <footer className="bg-secondary-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-right" dir="rtl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-primary-300">בדק בית מקצועי</h3>
-              <p className="text-gray-400">
-                צוות המהנדסים שלנו בעל ניסיון של למעלה מ-15 שנה בתחום. נשמח לסייע לך בכל שאלה.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-primary-300">ליצירת קשר</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>טלפון: 03-1234567</li>
-                <li>דוא"ל: info@bedek-bait.co.il</li>
-                <li>כתובת: רחוב הבונים 10, תל אביב</li>
-                <li>נייד: 050-1234567</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-primary-300">שעות פעילות</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>ימים א'-ה': 08:00-18:00</li>
-                <li>יום ו': 08:00-13:00</li>
-                <li>שבת: סגור</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-            <p className="text-gray-500">© {new Date().getFullYear()} בדק בית מקצועי. כל הזכויות שמורות.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

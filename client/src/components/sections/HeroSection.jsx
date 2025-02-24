@@ -5,7 +5,7 @@ const EnhancedHeroSection = () => {
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
 
-  // אנימציית גרף הנדסי מתקדם
+  // אנימציית גרף הנדסי מתקדם (ללא שינוי)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -14,17 +14,15 @@ const EnhancedHeroSection = () => {
     const particles = [];
     const connections = [];
     const particleCount = 60;
-    
-    // התאמת גודל הקנבס לחלון
+
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // יצירת חלקיקים
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -32,83 +30,70 @@ const EnhancedHeroSection = () => {
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
         radius: Math.random() * 2 + 1,
-        color: 'rgba(255, 255, 255, 0.3)'
+        color: 'rgba(255, 255, 255, 0.3)',
       });
     }
 
-    // יצירת קישורים בין חלקיקים
     for (let i = 0; i < particleCount; i++) {
       for (let j = i + 1; j < particleCount; j++) {
         if (Math.random() > 0.97) {
           connections.push({
             from: i,
-            to: j
+            to: j,
           });
         }
       }
     }
 
-    // פונקציית אנימציה
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // ציור רשת הנדסית
       drawEngineeringGrid(ctx, canvas.width, canvas.height);
-      
-      // עדכון וציור חלקיקים
-      particles.forEach((particle, index) => {
+      particles.forEach((particle) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
-        
-        // גבולות קנבס
         if (particle.x < 0 || particle.x > canvas.width) particle.vx = -particle.vx;
         if (particle.y < 0 || particle.y > canvas.height) particle.vy = -particle.vy;
-        
+
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
         ctx.fill();
       });
-      
-      // ציור קווים מחברים
-      connections.forEach(conn => {
+
+      connections.forEach((conn) => {
         const fromParticle = particles[conn.from];
         const toParticle = particles[conn.to];
-        
         const dx = fromParticle.x - toParticle.x;
         const dy = fromParticle.y - toParticle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance < 150) {
           ctx.beginPath();
           ctx.moveTo(fromParticle.x, fromParticle.y);
           ctx.lineTo(toParticle.x, toParticle.y);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 150)})`;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${
+            0.1 * (1 - distance / 150)
+          })`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       });
 
-      // ציור אלמנטים הנדסיים (מעגלים, קווים ומדידות)
       drawEngineeringElements(ctx, canvas.width, canvas.height);
-      
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    // פונקציית ציור רשת הנדסית
     const drawEngineeringGrid = (ctx, width, height) => {
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 0.5;
-      
-      // רשת אופקית
+
       for (let y = 0; y < height; y += 50) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
         ctx.stroke();
       }
-      
-      // רשת אנכית
+
       for (let x = 0; x < width; x += 50) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -117,11 +102,9 @@ const EnhancedHeroSection = () => {
       }
     };
 
-    // פונקציית ציור אלמנטים הנדסיים
     const drawEngineeringElements = (ctx, width, height) => {
       const time = Date.now() * 0.001;
-      
-      // מעגל מדידה
+
       ctx.beginPath();
       const circleX = width * 0.15;
       const circleY = height * 0.7;
@@ -130,53 +113,57 @@ const EnhancedHeroSection = () => {
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
       ctx.lineWidth = 0.8;
       ctx.stroke();
-      
-      // קווי מדידה
+
       ctx.beginPath();
       ctx.moveTo(circleX - circleRadius - 20, circleY);
       ctx.lineTo(circleX + circleRadius + 20, circleY);
       ctx.stroke();
-      
+
       ctx.beginPath();
       ctx.moveTo(circleX, circleY - circleRadius - 20);
       ctx.lineTo(circleX, circleY + circleRadius + 20);
       ctx.stroke();
-      
-      // טקסט מדידה
+
       ctx.font = '10px Arial';
       ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.fillText(`R: ${circleRadius.toFixed(1)}`, circleX + circleRadius + 5, circleY - 10);
-      
-      // זווית מתמטית
+      ctx.fillText(
+        `R: ${circleRadius.toFixed(1)}`,
+        circleX + circleRadius + 5,
+        circleY - 10
+      );
+
       const angleX = width * 0.85;
       const angleY = height * 0.3;
       const angleRadius = 50;
       const startAngle = Math.PI * 0.5;
       const endAngle = startAngle + Math.sin(time * 0.5) * Math.PI * 0.4;
-      
+
       ctx.beginPath();
       ctx.arc(angleX, angleY, angleRadius, startAngle, endAngle);
       ctx.strokeStyle = 'rgba(0, 123, 255, 0.15)';
       ctx.lineWidth = 2;
       ctx.stroke();
-      
-      // קווי מידה לזווית
+
       ctx.beginPath();
       ctx.moveTo(angleX, angleY);
-      ctx.lineTo(angleX + Math.cos(endAngle) * (angleRadius + 10), angleY + Math.sin(endAngle) * (angleRadius + 10));
+      ctx.lineTo(
+        angleX + Math.cos(endAngle) * (angleRadius + 10),
+        angleY + Math.sin(endAngle) * (angleRadius + 10)
+      );
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
       ctx.stroke();
-      
-      ctx.fillText(`${((endAngle - startAngle) * (180 / Math.PI)).toFixed(0)}°`, 
-        angleX + Math.cos(endAngle) * (angleRadius + 20), 
-        angleY + Math.sin(endAngle) * (angleRadius + 20));
-      
-      // תרשים גלי
+
+      ctx.fillText(
+        `${((endAngle - startAngle) * (180 / Math.PI)).toFixed(0)}°`,
+        angleX + Math.cos(endAngle) * (angleRadius + 20),
+        angleY + Math.sin(endAngle) * (angleRadius + 20)
+      );
+
       const waveX = width * 0.5;
       const waveY = height * 0.8;
       const amplitude = 20;
       const frequency = 0.05;
-      
+
       ctx.beginPath();
       for (let i = -100; i < 100; i++) {
         const x = waveX + i;
@@ -191,7 +178,6 @@ const EnhancedHeroSection = () => {
 
     animate();
 
-    // ניקוי בעת ניתוק
     return () => {
       cancelAnimationFrame(animationFrameRef.current);
       window.removeEventListener('resize', resizeCanvas);
@@ -201,11 +187,8 @@ const EnhancedHeroSection = () => {
   return (
     <div className="relative bg-gradient-to-r from-primary-800 to-primary-900 overflow-hidden">
       {/* קנבס לאפקטים הנדסיים */}
-      <canvas 
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-      />
-      
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+
       {/* שכבת גרדיאנטים */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,123,255,0.2),transparent)]" />
@@ -233,7 +216,10 @@ const EnhancedHeroSection = () => {
       <div className="absolute bottom-20 left-10 opacity-20 hidden lg:block">
         <div className="relative">
           <div className="w-32 h-32 border-2 border-primary-300/10 rounded-full"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-px h-16 bg-primary-300/30 origin-bottom" style={{ transform: 'translate(-50%, -100%) rotate(-30deg)' }}></div>
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-px h-16 bg-primary-300/30 origin-bottom"
+            style={{ transform: 'translate(-50%, -100%) rotate(-30deg)' }}
+          ></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs text-primary-300/50">
             30°
           </div>
@@ -249,20 +235,28 @@ const EnhancedHeroSection = () => {
             <span>בדק הבית המקצועי בישראל</span>
             <ChevronRight className="w-4 h-4 ml-2 animate-bounce" />
           </div>
-          
-          {/* כותרת עם אפקט גרדיאנט */}
-          <div className="relative">
-            <h1 className="text-6xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-br from-white via-blue-100 to-primary-200">
-              אלעד מהנדסים
-            </h1>
-            <div className="absolute -top-4 -right-4 w-12 h-12 opacity-20">
-              <Compass className="w-full h-full text-primary-300 animate-spin" style={{ animationDuration: '15s' }} />
+
+          {/* לוגו וכותרת */}
+          <div className="relative flex items-center justify-center mb-8">
+            {/* Logo Image */}
+
+            {/* כותרת עם אפקט גרדיאנט */}
+            <div className="relative">
+              <h1 className="text-6xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-br from-white via-blue-100 to-primary-200 whitespace-nowrap">
+                אלעד מהנדסים
+              </h1>
+              <div className="absolute -top-4 -right-4 w-12 h-12 opacity-20">
+                <Compass
+                  className="w-full h-full text-primary-300 animate-spin"
+                  style={{ animationDuration: '15s' }}
+                />
+              </div>
             </div>
           </div>
-          
+
           {/* תיאור עם רקע חצי שקוף */}
-          <p className="mt-8 max-w-3xl text-xl text-primary-50 leading-relaxed backdrop-blur-sm bg-primary-900/20 p-6 rounded-2xl border border-primary-700/20 shadow-lg">
-          אלעד מהנדסים הינה חברה הנדסית המציעה שירותי בדק בית וייעוץ הנדסי
+          <p className="max-w-3xl text-xl text-primary-50 leading-relaxed backdrop-blur-sm bg-primary-900/20 p-6 rounded-2xl border border-primary-700/20 shadow-lg">
+            אלעד מהנדסים הינה חברה הנדסית המציעה שירותי בדק בית וייעוץ הנדסי
           </p>
 
           {/* סטטיסטיקה מקצועית מתחת לפסקה - ממורכזת */}
@@ -279,27 +273,27 @@ const EnhancedHeroSection = () => {
 
           {/* כפתורי פעולה משופרים - ממורכזים */}
           <div className="mt-10 flex justify-center gap-6 max-w-md w-full">
-  <a
-    href="tel:+972548116482"
-    className="relative overflow-hidden group inline-flex items-center justify-center px-8 py-4 bg-white/15 backdrop-blur-md text-lg font-medium rounded-lg text-white border border-primary-400/30 hover:bg-white/20 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2" // הוספתי gap-x-2
-  >
-    <span className="absolute inset-0 bg-gradient-to-r from-primary-600/40 to-primary-800/40 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
-    <Phone className="w-5 h-5 relative z-10" /> {/* הסרתי mr-4 */}
-    <span className="relative z-10">054-8116482</span>
-    <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-  </a>
-  <a
-    href="https://wa.me/972548116482"
-    className="relative overflow-hidden group inline-flex items-center justify-center px-8 py-4 bg-accent-600/80 backdrop-blur-md text-lg font-medium rounded-lg text-white border border-accent-400/30 hover:bg-accent-600/90 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2" // הוספתי gap-x-2
-  >
-    <span className="absolute inset-0 bg-gradient-to-r from-accent-700/40 to-accent-500/40 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
-    <MessageCircle className="w-5 h-5 relative z-10" /> {/* הסרתי mr-4 */}
-    <span className="relative z-10">WhatsApp</span>
-    <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-  </a>
-</div>
+            <a
+              href="tel:+972548116482"
+              className="relative overflow-hidden group inline-flex items-center justify-center px-8 py-4 bg-white/15 backdrop-blur-md text-lg font-medium rounded-lg text-white border border-primary-400/30 hover:bg-white/20 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-primary-600/40 to-primary-800/40 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              <Phone className="w-5 h-5 relative z-10" />
+              <span className="relative z-10">054-8116482</span>
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            </a>
+            <a
+              href="https://wa.me/972548116482"
+              className="relative overflow-hidden group inline-flex items-center justify-center px-8 py-4 bg-accent-600/80 backdrop-blur-md text-lg font-medium rounded-lg text-white border border-accent-400/30 hover:bg-accent-600/90 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-accent-700/40 to-accent-500/40 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              <MessageCircle className="w-5 h-5 relative z-10" />
+              <span className="relative z-10">WhatsApp</span>
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            </a>
+          </div>
         </div>
-      </div>
+        </div>
     </div>
   );
 };
