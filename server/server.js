@@ -31,7 +31,7 @@ app.post('/api/send-email', (req, res) => {
 
     const mailOptions = {
         from: process.env.EMAIL_USER, // השתמש במייל ממנו אתה שולח
-        to: 'liron.c1994@gmail.com',    //  <--  כתובת המייל *שלך* (של אלעד מהנדסים)
+        to: 'info@elad-engineers.co.il',    //  <--  כתובת המייל *שלך* (של אלעד מהנדסים)
         subject: `פנייה חדשה מאתר אלעד מהנדסים: ${subject}`,
         text: `
             שם: ${name}
