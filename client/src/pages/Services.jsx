@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useAnimation, useInView } from 'framer-motion';
+import { Link } from 'react-router-dom'; // Import Link
+
 
 import {
   FaCheckCircle,
@@ -17,7 +19,7 @@ import {
 } from 'react-icons/fa';
 
 import { BiBuildingHouse } from 'react-icons/bi';
-import { GiBrickWall } from 'react-icons/gi';
+import { GiBrickWall, GiMagnifyingGlass } from 'react-icons/gi';
 import AnimatedCTA from '../components/AnimatedCTA';
 
 // קומפוננטה של אנימציית רקע הנדסית
@@ -41,7 +43,7 @@ const EngineeringBackground = () => {
           <rect width="100%" height="100%" fill="url(#blueprint)" />
         </svg>
       </div>
-      
+
       {/* אנימציית מדידות נעות - רק 2 במקום 5 */}
       {[...Array(2)].map((_, i) => (
         <motion.div
@@ -58,14 +60,14 @@ const EngineeringBackground = () => {
           }}
         />
       ))}
-      
+
       {/* מעגל מדידה אחד במקום 3 */}
       <motion.div
         className="absolute rounded-full border border-primary-400"
         style={{ top: '40%', left: '30%', width: '100px', height: '100px' }}
         animate={{ opacity: [0.1, 0.3, 0.1], scale: [0, 1.2, 0] }}
         transition={{
-          duration: 10, 
+          duration: 10,
           repeat: Infinity,
           repeatType: 'reverse',
           ease: 'easeInOut'
@@ -80,13 +82,13 @@ const ServiceCard = ({ service, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
   const controls = useAnimation();
-  
+
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
     }
   }, [controls, isInView]);
-  
+
   return (
     <motion.div
       ref={ref}
@@ -94,12 +96,12 @@ const ServiceCard = ({ service, index }) => {
       animate={controls}
       variants={{
         hidden: { opacity: 0, y: 50 },
-        visible: { 
-          opacity: 1, 
+        visible: {
+          opacity: 1,
           y: 0,
-          transition: { 
-            duration: 0.5, 
-            delay: index * 0.2 
+          transition: {
+            duration: 0.5,
+            delay: index * 0.2
           }
         }
       }}
@@ -107,7 +109,7 @@ const ServiceCard = ({ service, index }) => {
     >
       {/* אפקטים של רקע טכני שמופיע בהובר */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      
+
       <div className="relative">
         <div className="flex items-center space-x-3 space-x-reverse mb-4">
           <div className="p-3 bg-primary-100 rounded-full text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
@@ -214,20 +216,20 @@ const StatsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
   const controls = useAnimation();
-  
+
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
     }
   }, [controls, isInView]);
-  
+
   const stats = [
     { number: "1000+", text: "פרויקטים שהושלמו" },
     { number: "24/7", text: "זמינות" },
     { number: "15+", text: "שנות ניסיון" },
     { number: "50+", text: "קבלנים ויזמים שעובדים איתנו" }
   ];
-  
+
   return (
     <motion.div
       ref={ref}
@@ -252,8 +254,8 @@ const StatsSection = () => {
               key={index}
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { 
-                  opacity: 1, 
+                visible: {
+                  opacity: 1,
                   y: 0,
                   transition: { duration: 0.5 }
                 }
@@ -273,16 +275,16 @@ const BedekBait = () => {
   const { scrollYProgress } = useScroll();
   const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0.8]);
   const headerScale = useTransform(scrollYProgress, [0, 0.05], [1, 0.98]);
-  
+
   // רפרנס לסקשנים השונים לאנימציה
   const whatIsRef = useRef(null);
   const servicesRef = useRef(null);
   const whatIsInView = useInView(whatIsRef, { once: false, amount: 0.3 });
   const servicesInView = useInView(servicesRef, { once: false, amount: 0.1 });
-  
+
   const whatIsControls = useAnimation();
   const servicesControls = useAnimation();
-  
+
   useEffect(() => {
     if (whatIsInView) {
       whatIsControls.start("visible");
@@ -291,7 +293,7 @@ const BedekBait = () => {
       servicesControls.start("visible");
     }
   }, [whatIsControls, servicesControls, whatIsInView, servicesInView]);
-  
+
   return (
     <div className="min-h-screen font-heebo bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
       {/* רקע הנדסי אנימטיבי */}
@@ -307,7 +309,7 @@ const BedekBait = () => {
         >
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             <div className="lg:col-span-3">
-              <motion.h2 
+              <motion.h2
                 className="text-4xl md:text-5xl font-rubik font-extrabold text-secondary-900 leading-tight"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -316,38 +318,44 @@ const BedekBait = () => {
                 בדק בית מקצועי
                 <span className="block text-primary-600">לנכס ללא פשרות</span>
               </motion.h2>
-              
-              <motion.p 
+
+              <motion.p
                 className="mt-4 text-lg md:text-xl text-secondary-700 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                בדק בית מקצועי מספק לכם שקט נפשי וידע מלא על מצב הנכס.  
+                בדק בית מקצועי מספק לכם שקט נפשי וידע מלא על מצב הנכס.
                 הצוות שלנו, המורכב ממהנדסים מומחים, יאתר את כל הליקויים האפשריים ויבטיח שתיכנסו לנכס ברגל ימין.
               </motion.p>
-              
-              <motion.div 
+
+              <motion.div
                 className="mt-8 flex flex-wrap gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                <button className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 font-medium">
+                <a
+                  href="tel:+972548116482"
+                  className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 font-medium"
+                >
                   קבע בדיקה עכשיו
-                </button>
-                <button className="px-6 py-3 bg-white border border-primary-500 text-primary-600 hover:bg-primary-50 rounded-lg shadow-md hover:shadow-lg transition duration-300 font-medium">
+                </a>
+                <Link
+                  to="/whatisit"
+                  className="px-6 py-3 bg-white border border-primary-500 text-primary-600 hover:bg-primary-50 rounded-lg shadow-md hover:shadow-lg transition duration-300 font-medium"
+                >
                   למידע נוסף
-                </button>
+                </Link>
               </motion.div>
             </div>
           </div>
         </motion.section>
 
         {/* מקטע ראשי: מה כולל בדק בית? */}
-        <section 
-          id="what-is" 
-          ref={whatIsRef} 
+        <section
+          id="what-is"
+          ref={whatIsRef}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-right"
           dir="rtl"
         >
@@ -365,7 +373,7 @@ const BedekBait = () => {
               }
             }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-rubik font-bold text-secondary-900 mb-3 pb-2 border-b-2 border-primary-500 inline-block"
               variants={{
                 hidden: { opacity: 0, x: -20 },
@@ -374,8 +382,8 @@ const BedekBait = () => {
             >
               מה כולל בדק בית מקצועי?
             </motion.h2>
-            
-            <motion.p 
+
+            <motion.p
               className="text-lg text-secondary-700 mb-8"
               variants={{
                 hidden: { opacity: 0 },
@@ -389,18 +397,18 @@ const BedekBait = () => {
               <div className="p-6 md:p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {mainBulletPoints.map((point, index) => (
-                    <motion.div 
-                      key={index} 
+                    <motion.div
+                      key={index}
                       className="flex items-start bg-gray-50 p-4 rounded-lg hover:bg-primary-50 transition-colors duration-300"
                       variants={{
                         hidden: { opacity: 0, y: 20 },
-                        visible: { 
-                          opacity: 1, 
-                          y: 0, 
-                          transition: { 
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: {
                             duration: 0.4,
                             delay: index * 0.1
-                          } 
+                          }
                         }
                       }}
                     >
@@ -414,23 +422,23 @@ const BedekBait = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-r from-primary-600 to-accent-500 px-6 py-4">
                 <p className="text-white font-medium text-center">
                   בדק הבית שלנו מבוסס על למעלה מ-15 שנות ניסיון בתחום ההנדסה והבנייה
                 </p>
               </div>
             </div>
-            
+
             {/* סרגל אינדיקציה אנימטיבי */}
-            <motion.div 
+            <motion.div
               className="mt-8 h-2 bg-gray-200 rounded-full overflow-hidden"
               variants={{
                 hidden: { opacity: 0 },
                 visible: { opacity: 1, transition: { duration: 0.5, delay: 0.5 } }
               }}
             >
-              <motion.div 
+              <motion.div
                 className="h-full bg-gradient-to-l from-primary-600 to-accent-500"
                 initial={{ width: "0%" }}
                 animate={{ width: "87%" }}
@@ -444,8 +452,8 @@ const BedekBait = () => {
         <StatsSection />
 
         {/* סוגי נכסים - בדק בית */}
-        <section 
-          id="services" 
+        <section
+          id="services"
           ref={servicesRef}
           className="py-16 bg-gray-50 border-t border-b border-gray-200 relative overflow-hidden"
           dir="rtl"
@@ -465,7 +473,7 @@ const BedekBait = () => {
                 }
               }}
             >
-              <motion.h2 
+              <motion.h2
                 className="text-3xl font-rubik font-bold text-secondary-900 text-center mb-2"
                 variants={{
                   hidden: { opacity: 0, y: -20 },
@@ -474,16 +482,16 @@ const BedekBait = () => {
               >
                 סוגי נכסים בהם אנו מבצעים בדק בית
               </motion.h2>
-              
-              <motion.div 
+
+              <motion.div
                 className="h-1 w-24 bg-primary-500 mx-auto mb-6"
                 variants={{
                   hidden: { opacity: 0, width: 0 },
                   visible: { opacity: 1, width: 96, transition: { duration: 0.7 } }
                 }}
               />
-              
-              <motion.p 
+
+              <motion.p
                 className="text-lg text-secondary-700 text-center max-w-3xl mx-auto mb-12"
                 variants={{
                   hidden: { opacity: 0 },
@@ -499,9 +507,9 @@ const BedekBait = () => {
                   <ServiceCard key={index} service={service} index={index} />
                 ))}
               </div>
-              
+
               {/* יתרונות נוספים */}
-              <motion.div 
+              <motion.div
                 className="mt-16 bg-white rounded-2xl shadow-lg p-8 border border-gray-100"
                 variants={{
                   hidden: { opacity: 0, y: 40 },
@@ -511,112 +519,113 @@ const BedekBait = () => {
                 <h3 className="text-2xl font-rubik font-bold text-primary-600 mb-6 text-center">
                   למה לבצע בדק בית עם הצוות שלנו?
                 </h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div className="flex items-start">
-    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
-      <FaShieldAlt size={20} />
-    </div>
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-2">מהנדסים מוסמכים בלבד</h4>
-      <p className="text-secondary-700">כל הבדיקות שלנו מבוצעות על-ידי מהנדסים רשומים בעלי רישיון בתוקף ולא ע"י הנדסאים או טכנאים.</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start">
-    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
-      <FaTools size={20} />
-    </div>
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-2">ציוד מתקדם</h4>
-      <p className="text-secondary-700">שימוש במכשור טכנולוגי מתקדם לאיתור ליקויים סמויים כגון מצלמות טרמיות ואמצעי מדידה מדויקים.</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start">
-    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
-      <FaClipboardCheck size={20} />
-    </div>
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-2">דוחות מפורטים</h4>
-      <p className="text-secondary-700">דוחות מקיפים הכוללים ממצאים, תמונות, הפניות לתקנים ואומדן עלויות לתיקון.</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start">
-    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
-      <FaHandshake size={20} />
-    </div>
-    <div>
-      <h4 className="font-bold text-lg text-secondary-900 mb-2">ליווי מקצועי</h4>
-      <p className="text-secondary-700">ליווי אישי ומקצועי לאורך כל התהליך, כולל עזרה במו"מ מול קבלנים ומוכרים.</p>
-    </div>
-  </div>
-</div>
+                  <div className="flex items-start">
+                    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
+                      <FaShieldAlt size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-secondary-900 mb-2">מהנדסים מוסמכים בלבד</h4>
+                      <p className="text-secondary-700">כל הבדיקות שלנו מבוצעות על-ידי מהנדסים רשומים בעלי רישיון בתוקף ולא ע"י הנדסאים או טכנאים.</p>
+                    </div>
+                  </div>
 
-{/* כפתור קריאה לפעולה */}
-<div className="mt-8 text-center">
-  <button className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 font-medium">
-    קבל הצעת מחיר לבדק בית
-  </button>
-</div>
+                  <div className="flex items-start">
+                    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
+                      <FaTools size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-secondary-900 mb-2">ציוד מתקדם</h4>
+                      <p className="text-secondary-700">שימוש במכשור טכנולוגי מתקדם לאיתור ליקויים סמויים כגון מצלמות טרמיות ואמצעי מדידה מדויקים.</p>
+                    </div>
+                  </div>
 
+                  <div className="flex items-start">
+                    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
+                      <FaClipboardCheck size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-secondary-900 mb-2">דוחות מפורטים</h4>
+                      <p className="text-secondary-700">דוחות מקיפים הכוללים ממצאים, תמונות, הפניות לתקנים ואומדן עלויות לתיקון.</p>
+                    </div>
+                  </div>
 
+                  <div className="flex items-start">
+                    <div className="ml-4 p-3 bg-primary-100 rounded-full text-primary-600">
+                      <FaHandshake size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-secondary-900 mb-2">ליווי מקצועי</h4>
+                      <p className="text-secondary-700">ליווי אישי ומקצועי לאורך כל התהליך, כולל עזרה במו"מ מול קבלנים ומוכרים.</p>
+                    </div>
+                  </div>
+                </div>
 
-{/* חלק שאלות נפוצות */}
-<div className="mt-16">
-  <h3 className="text-2xl font-rubik font-bold text-secondary-900 mb-6 text-center">שאלות נפוצות</h3>
-  
-  <div className="space-y-4">
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
-      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
-        <h4 className="font-bold text-secondary-900">כמה זמן אורכת בדיקת בדק בית?</h4>
-        <FaChevronDown className="text-primary-600" />
-      </button>
-      <div className="py-4 px-6 bg-white">
-        <p className="text-secondary-700">
-          בדיקת בדק בית אורכת בין שעתיים לארבע שעות, בהתאם לגודל הנכס ומורכבותו. דוח מפורט נשלח תוך 48 שעות מסיום הבדיקה.
-        </p>
-      </div>
-    </div>
-    
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
-      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
-        <h4 className="font-bold text-secondary-900">מתי מומלץ לבצע בדק בית?</h4>
-        <FaChevronDown className="text-primary-600" />
-      </button>
-      <div className="py-4 px-6 bg-white">
-        <p className="text-secondary-700">
-          לדירות חדשות מקבלן - לפני חתימה על טופס 4 וקבלת מפתח. לדירות יד שניה - לפני סגירת העסקה וחתימה על חוזה. לנכסים מסחריים - לפני חתימת חוזה שכירות או רכישה.
-        </p>
-      </div>
-    </div>
-    
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
-      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
-        <h4 className="font-bold text-secondary-900">האם נדרשת נוכחות שלי בבדיקה?</h4>
-        <FaChevronDown className="text-primary-600" />
-      </button>
-      <div className="py-4 px-6 bg-white">
-        <p className="text-secondary-700">
-          מומלץ להיות נוכח לפחות בחלק מהבדיקה, במיוחד בסיכום הממצאים. עם זאת, אין הדבר הכרחי ואנו יכולים לבצע את הבדיקה גם ללא נוכחותכם.
-        </p>
-      </div>
-    </div>
-    
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
-      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
-        <h4 className="font-bold text-secondary-900">האם הדוח שלכם מתקבל משפטית?</h4>
-        <FaChevronDown className="text-primary-600" />
-      </button>
-      <div className="py-4 px-6 bg-white">
-        <p className="text-secondary-700">
-          כן, הדוחות שלנו נכתבים על ידי מהנדסים מוסמכים ומוכרים בבתי משפט ובהליכים משפטיים מול קבלנים, מוכרים וחברות ביטוח.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+                {/* כפתור קריאה לפעולה */}
+                <div className="mt-8 text-center">
+                  <a
+                    href="tel:+972548116482"
+                    className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 font-medium"
+                  >
+                    קבל הצעת מחיר לבדק בית
+                  </a>
+                </div>
+
+                {/* חלק שאלות נפוצות */}
+                <div className="mt-16">
+                  <h3 className="text-2xl font-rubik font-bold text-secondary-900 mb-6 text-center">שאלות נפוצות</h3>
+
+                  <div className="space-y-4">
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
+                        <h4 className="font-bold text-secondary-900">כמה זמן אורכת בדיקת בדק בית?</h4>
+                        <FaChevronDown className="text-primary-600" />
+                      </button>
+                      <div className="py-4 px-6 bg-white">
+                        <p className="text-secondary-700">
+                          בדיקת בדק בית אורכת בין שעתיים לארבע שעות, בהתאם לגודל הנכס ומורכבותו. דוח מפורט נשלח תוך 48 שעות מסיום הבדיקה.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                    <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
+                        <h4 className="font-bold text-secondary-900">מתי מומלץ לבצע בדק בית?</h4>
+                        <FaChevronDown className="text-primary-600" />
+                      </button>
+                      <div className="py-4 px-6 bg-white">
+                        <p className="text-secondary-700">
+                          לדירות חדשות מקבלן - לפני חתימה על טופס 4 וקבלת מפתח. לדירות יד שניה - לפני סגירת העסקה וחתימה על חוזה. לנכסים מסחריים - לפני חתימת חוזה שכירות או רכישה.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
+                        <h4 className="font-bold text-secondary-900">האם נדרשת נוכחות שלי בבדיקה?</h4>
+                        <FaChevronDown className="text-primary-600" />
+                      </button>
+                      <div className="py-4 px-6 bg-white">
+                        <p className="text-secondary-700">
+                          מומלץ להיות נוכח לפחות בחלק מהבדיקה, במיוחד בסיכום הממצאים. עם זאת, אין הדבר הכרחי ואנו יכולים לבצע את הבדיקה גם ללא נוכחותכם.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <button className="w-full py-4 px-6 text-right bg-gray-50 hover:bg-primary-50 flex justify-between items-center transition-colors">
+                        <h4 className="font-bold text-secondary-900">האם הדוח שלכם מתקבל משפטית?</h4>
+                        <FaChevronDown className="text-primary-600" />
+                      </button>
+                      <div className="py-4 px-6 bg-white">
+                        <p className="text-secondary-700">
+                          כן, הדוחות שלנו נכתבים על ידי מהנדסים מוסמכים ומוכרים בבתי משפט ובהליכים משפטיים מול קבלנים, מוכרים וחברות ביטוח.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -627,7 +636,6 @@ const BedekBait = () => {
           <AnimatedCTA />
         </section>
       </main>
-      
     </div>
   );
 };

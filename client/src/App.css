@@ -36,3 +36,46 @@
     transform: rotate(360deg);
   }
 }
+/* אנימציות ממוקדות ומקצועיות */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* תמיכה במובייל */
+@media (max-width: 768px) {
+  .text-base {
+    font-size: 0.95rem;
+  }
+  
+  .text-sm {
+    font-size: 0.85rem;
+  }
+}
+
+/* מרווח עליון לתוכן העמוד כדי למנוע חפיפה עם ה-Navbar */
+.main-content {
+  padding-top: 5rem; /* מרווח מהחלק העליון של הדף */
+}
+
+/* אם אתה משתמש ב-Layout כללי, תוכל להוסיף את הקוד הבא */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding-top: 5rem; /* מרווח מהחלק העליון של הדף */
+}
