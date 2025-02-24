@@ -1,120 +1,177 @@
-// src/pages/Services.js
+// src/pages/BedekBait.js
+
 import React from 'react';
+import { motion } from 'framer-motion';
+import {
+  FaHouseDamage, // אייקון לדירות חדשות מקבלן
+  FaHome,        // אייקון לדירות יד שנייה
+  FaBuilding,    // אייקון לנכסים מסחריים
+  FaCheckCircle  // אייקון "וי" לנקודות
+} from 'react-icons/fa';
+import AnimatedCTA from '../components/AnimatedCTA'; // נתיב דוגמה
 
-const Services = () => {
-  const services = [
-    {
-      title: 'תכנון מבנים',
-      description: 'תכנון מקצועי ומפורט של מבנים מסוגים שונים, כולל מבני מגורים, מסחר ותעשייה',
-      features: [
-        'תכנון אדריכלי',
-        'תכנון קונסטרוקציה',
-        'חישובים סטטיים',
-        'הכנת תוכניות עבודה מפורטות'
-      ]
-    },
-    {
-      title: 'ייעוץ הנדסי',
-      description: 'שירותי ייעוץ מקיפים בכל תחומי ההנדסה האזרחית',
-      features: [
-        'בדיקות היתכנות',
-        'ייעוץ טכני',
-        'פתרון בעיות הנדסיות',
-        'ליווי פרויקטים'
-      ]
-    },
-    {
-      title: 'פיקוח על פרויקטים',
-      description: 'פיקוח צמוד ומקצועי על פרויקטי בנייה מכל הסוגים',
-      features: [
-        'פיקוח על ביצוע',
-        'בקרת איכות',
-        'ניהול לוחות זמנים',
-        'תיאום בין קבלנים'
-      ]
-    },
-    {
-      title: 'בדיקות מבנים',
-      description: 'בדיקות מקיפות של מבנים קיימים וחדשים',
-      features: [
-        'בדיקות יציבות',
-        'איתור ליקויי בנייה',
-        'הערכת מצב מבנים',
-        'המלצות לשיפורים ותיקונים'
-      ]
-    },
-    {
-      title: 'תכנון תשתיות',
-      description: 'תכנון מערכות תשתית מורכבות',
-      features: [
-        'תכנון כבישים',
-        'מערכות ניקוז',
-        'תשתיות מים וביוב',
-        'תכנון חניונים'
-      ]
-    },
-    {
-      title: 'שירותי מעבדה',
-      description: 'בדיקות מעבדה מקיפות לחומרי בנייה ותשתית',
-      features: [
-        'בדיקות בטון',
-        'בדיקות קרקע',
-        'בדיקות אטימות',
-        'בדיקות חוזק חומרים'
-      ]
+// הגדרות לאנימציה: Fade-In עדין לכל העמוד ולילדים
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      when: 'beforeChildren',
+      staggerChildren: 0.15
     }
-  ];
+  }
+};
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
+
+// סעיפים עיקריים (bullet points) למה כולל בדק בית
+const mainBulletPoints = [
+  'דוח הנדסי מפורט הכולל פירוט ליקויים והפניה לתקנים הרלוונטיים',
+  'בדיקת עמידה בתקני הבנייה הישראליים ובתקנות התכנון והבנייה',
+  'בדיקת ממ"ד בהתאם לדרישות פיקוד העורף (הג"א)',
+  'תשתיות חשמל, אינסטלציה, מיזוג אוויר ואיטום',
+  'תיעוד הליקויים בצילום מקצועי והערכת עלויות תיקון',
+  'דיווח קביל משפטית מול הקבלן או בבית המשפט',
+  'ליווי מקצועי עד לתיקון הליקויים בפועל'
+];
+
+// שלושה סוגי שירותי בדק בית, כל אחד עם רשימת נקודות ייחודית
+const bedekServices = [
+  {
+    title: 'דירות חדשות מקבלן',
+    icon: <FaHouseDamage size={32} className="text-red-600" />,
+    shortDescription: `מבטיחים שהדירה החדשה אכן תואמת את התכניות והמפרט שקיבלתם, 
+    ומאתרים ליקויים שעשויים לגרום להוצאות עתידיות.`,
+    points: [
+      'התאמת הדירה לחוזה המכר ולמפרט הטכני',
+      'בדיקת גימורים בהתאם לתוכניות שינוי דיירים',
+      'איתור כשלים מבניים וליקויי איטום בשלב מוקדם'
+    ]
+  },
+  {
+    title: 'דירות יד שנייה',
+    icon: <FaHome size={32} className="text-green-600" />,
+    shortDescription: `בדיקה מקצועית שתחשוף ליקויים נסתרים, רטיבויות או מערכות מיושנות,
+    כדי שתדעו בדיוק מה מצב הנכס לפני רכישה או שיפוץ.`,
+    points: [
+      'סקירת שלד ובדיקת יציבות הנכס',
+      'זיהוי נזקי רטיבות, עובש וסדקים',
+      'הערכת עלויות שיפוץ או תיקון פגמים'
+    ]
+  },
+  {
+    title: 'נכסים מסחריים',
+    icon: <FaBuilding size={32} className="text-blue-600" />,
+    shortDescription: `בין אם זה משרד, חנות או מבנה תעשייתי, אנו בודקים עמידה בתקני בטיחות,
+    מערכות HVAC, ספרינקלרים, ועוד.`,
+    points: [
+      'התאמה לתקנות כיבוי אש ולבטיחות מבנים',
+      'בדיקת מערכות חשמל ותקשורת לעומסים גבוהים',
+      'זיהוי מפגעים שעלולים לפגוע בערך הנכס'
+    ]
+  }
+];
+
+const BedekBait = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-right">
-          <h1 className="text-3xl font-extrabold text-gray-900">
-            השירותים שלנו
-          </h1>
-          <p className="mt-4 text-xl text-gray-500">
-            מגוון רחב של שירותים הנדסיים מקצועיים המותאמים לצרכי הלקוח
-          </p>
-        </div>
+    <motion.div
+      className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 text-right"
+      dir="rtl"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      {/* כותרת כללית */}
+      <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-8">
+        <h1 className="text-3xl font-extrabold text-gray-900">
+          בדק בית – כל מה שאתם צריכים לדעת
+        </h1>
+        <p className="mt-2 text-lg text-gray-600">
+          בדק בית מקצועי מספק לכם שקט נפשי וידע מלא על מצב הנכס.  
+          הצוות שלנו, המורכב ממהנדסים מומחים, יאתר את כל הליקויים האפשריים ויבטיח שתיכנסו ברגל ימין.
+        </p>
+      </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {service.title}
-                </h3>
-                <p className="mt-4 text-gray-500">
-                  {service.description}
-                </p>
-                <ul className="mt-4 space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start text-right">
-                      <span className="text-green-500 ml-2">✓</span>
-                      <span className="text-gray-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <h2 className="text-2xl font-bold text-gray-900">
-            מעוניינים לשמוע עוד על השירותים שלנו?
+      {/* מקטע ראשי: מה כולל בדק בית? */}
+      <motion.div
+        variants={itemVariants}
+        className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mb-12"
+      >
+        <div className="p-6">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            מה כולל בדק בית?
           </h2>
-          <p className="mt-4 text-lg text-gray-500">
-            צוות המומחים שלנו ישמח לענות על כל שאלה ולהתאים עבורכם את הפתרון המושלם
-          </p>
-          <button className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-blue-700">
-            צור קשר
-          </button>
+          <ul className="space-y-3">
+            {mainBulletPoints.map((point, index) => (
+              <li key={index} className="flex items-start">
+                <FaCheckCircle className="text-green-500 ml-2 mt-1" />
+                <span className="text-gray-700 leading-relaxed">
+                  {point}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-    </div>
+      </motion.div>
+
+      {/* סוגי נכסים - בדק בית */}
+      <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900">
+          סוגי נכסים בהם אנו מבצעים בדק בית
+        </h2>
+        <p className="mt-2 text-gray-600">
+          לכל סוג נכס מאפיינים ייחודיים, וצוות המהנדסים שלנו מתאים את הבדיקה לצרכים הספציפיים של הנכס.
+        </p>
+      </motion.div>
+
+      {/* Grid של שלושת השירותים */}
+      <motion.div
+        variants={itemVariants}
+        className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {bedekServices.map((service, index) => (
+          <motion.div
+            key={index}
+            variants={itemVariants}
+            className="bg-white rounded-lg shadow-md p-6 flex flex-col"
+          >
+            <div className="flex items-center space-x-3 space-x-reverse mb-3">
+              {service.icon}
+              <h4 className="text-xl font-bold text-gray-900">
+                {service.title}
+              </h4>
+            </div>
+
+            <p className="text-gray-600 mb-3">
+              {service.shortDescription}
+            </p>
+
+            {/* נקודות ייחודיות לכל סוג נכס */}
+            <ul className="mt-auto space-y-2">
+              {service.points.map((point, i) => (
+                <li key={i} className="flex items-start">
+                  <FaCheckCircle className="text-green-500 ml-2 mt-1" />
+                  <span className="text-gray-700 leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* CTA תחתון */}
+      <AnimatedCTA />
+    </motion.div>
   );
 };
 
-export default Services;
+export default BedekBait;
