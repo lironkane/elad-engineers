@@ -6,6 +6,7 @@ require('dotenv').config(); //  <--  הוספנו את זה!
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 // Middleware
 app.use(express.json());
 app.use(cors());
