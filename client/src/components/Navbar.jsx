@@ -11,14 +11,17 @@ const Navbar = () => {
   return (
     <nav className="relative bg-white shadow-md" dir="rtl">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* לוגו */}
+        <div className="flex justify-between items-center h-20">
+          {/* לוגו - עם רקע וגודל מוגדל */}
           <div className="flex-shrink-0">
-            <Link
-              to="/"
-              className="text-2xl font-bold text-gray-900 hover:text-primary-500 transition-colors duration-300"
-            >
-              אלעד מהנדסים
+            <Link to="/">
+              <div className="bg-gray-50 rounded-lg p-0 shadow-md"> {/* הווספתי רקע */}
+                <img
+                  src="/images/logo.png"
+                  alt="אלעד מהנדסים לוגו"
+                  className="h-32 w-auto"  
+                />
+              </div>
             </Link>
           </div>
 
