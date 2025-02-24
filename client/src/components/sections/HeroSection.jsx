@@ -260,31 +260,33 @@ const EnhancedHeroSection = () => {
           </p>
 
           {/* סטטיסטיקה מקצועית מתחת לפסקה - ממורכזת */}
-          <div className="mt-8 flex justify-center gap-16 max-w-3xl mx-auto">
-            <div className="text-primary-100 flex flex-col items-center backdrop-blur-sm bg-primary-800/10 py-4 px-8 rounded-lg border border-primary-700/20">
-              <span className="font-bold text-3xl text-white">+1,000</span>
-              <span className="text-sm text-primary-200">פרויקטים מוצלחים</span>
+          <div className="mt-8 flex justify-center gap-8 sm:gap-16 max-w-3xl mx-auto">
+            <div className="text-primary-100 flex flex-col items-center backdrop-blur-sm bg-primary-800/10 py-4 px-6 sm:px-8 rounded-lg border border-primary-700/20">
+              <span className="font-bold text-2xl sm:text-3xl text-white">+1,000</span>
+              <span className="text-xs sm:text-sm text-primary-200">פרויקטים מוצלחים</span>
             </div>
-            <div className="text-primary-100 flex flex-col items-center backdrop-blur-sm bg-primary-800/10 py-4 px-8 rounded-lg border border-primary-700/20">
-              <span className="font-bold text-3xl text-white">24/7</span>
-              <span className="text-sm text-primary-200">זמינות לקוחות</span>
+            <div className="text-primary-100 flex flex-col items-center backdrop-blur-sm bg-primary-800/10 py-4 px-6 sm:px-8 rounded-lg border border-primary-700/20">
+              <span className="font-bold text-2xl sm:text-3xl text-white">24/7</span>
+              <span className="text-xs sm:text-sm text-primary-200">זמינות לקוחות</span>
             </div>
           </div>
 
           {/* כפתורי פעולה משופרים - ממורכזים */}
-          <div className="mt-10 flex justify-center gap-6 max-w-md w-full">
+          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 max-w-md w-full">
             <a
               href="tel:+972548116482"
-              className="relative overflow-hidden group inline-flex items-center justify-center px-8 py-4 bg-white/15 backdrop-blur-md text-lg font-medium rounded-lg text-white border border-primary-400/30 hover:bg-white/20 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2"
+              className="relative overflow-hidden group inline-flex items-center justify-center px-6 py-4 bg-white/15 backdrop-blur-md text-base lg:text-lg font-medium rounded-lg text-white border border-primary-400/30 hover:bg-white/20 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-primary-600/40 to-primary-800/40 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
               <Phone className="w-5 h-5 relative z-10" />
-              <span className="relative z-10">054-8116482</span>
+              {/* מסתיר את המספר במסכים קטנים ומציג "לחץ להתקשר" במקום */}
+              <span className="relative z-10 hidden sm:inline-block">054-8116482</span>
+              <span className="relative z-10 sm:hidden">לחץ להתקשר</span>
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
             </a>
             <a
               href="https://wa.me/972548116482"
-              className="relative overflow-hidden group inline-flex items-center justify-center px-8 py-4 bg-accent-600/80 backdrop-blur-md text-lg font-medium rounded-lg text-white border border-accent-400/30 hover:bg-accent-600/90 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2"
+              className="relative overflow-hidden group inline-flex items-center justify-center px-6 py-4 bg-accent-600/80 backdrop-blur-md text-base lg:text-lg font-medium rounded-lg text-white border border-accent-400/30 hover:bg-accent-600/90 transition-all duration-300 shadow-lg w-full max-w-xs gap-x-2"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-accent-700/40 to-accent-500/40 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
               <MessageCircle className="w-5 h-5 relative z-10" />
@@ -293,7 +295,7 @@ const EnhancedHeroSection = () => {
             </a>
           </div>
         </div>
-        </div>
+      </div>
     </div>
   );
 };
