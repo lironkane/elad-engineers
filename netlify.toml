@@ -1,0 +1,14 @@
+[build]
+  command = "npm install && npm run build --workspace=client"  # פקודת ה-build
+  publish = "client/build"    # התיקייה שמכילה את האתר הבנוי
+
+[[redirects]]
+  from = "/api/*"         # כל בקשה שמתחילה ב-/api
+  to = "http://localhost:3001/api/:splat"   # תופנה ל-backend (בפיתוח!)
+  status = 200            # קוד 200 (OK) - חשוב ל-proxy
+  force = true # אם יש התנגשות, אז שה redirect הזה ינצח
+
+[[redirects]]
+  from = "/*"             # כל נתיב אחר
+  to = "/index.html"     # הגש את index.html (ל-SPA)
+  status = 200
