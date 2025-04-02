@@ -165,10 +165,6 @@ const mainBulletPoints = [
     text: 'דיווח קביל משפטית מול הקבלן או בבית המשפט',
     icon: <FaClipboardCheck size={20} />
   },
-  {
-    text: 'ליווי מקצועי עד לתיקון הליקויים בפועל',
-    icon: <BiBuildingHouse size={20} />
-  }
 ];
 
 // שלושה סוגי שירותי בדק בית, כל אחד עם רשימת נקודות ייחודית
@@ -425,7 +421,6 @@ const BedekBait = () => {
 
               <div className="bg-gradient-to-r from-primary-600 to-accent-500 px-6 py-4">
                 <p className="text-white font-medium text-center">
-                  בדק הבית שלנו מבוסס על למעלה מ-15 שנות ניסיון בתחום ההנדסה והבנייה
                 </p>
               </div>
             </div>

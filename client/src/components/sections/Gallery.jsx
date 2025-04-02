@@ -161,12 +161,14 @@ const EngineeringTestimonialsGallery = () => {
     };
   };
 
+  // הפכנו את המיפוי: כפתור ימני מזיז את האינדקס לכיוון שמאלי (מפחית אינדקס)
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % imagePaths.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + imagePaths.length) % imagePaths.length);
   };
 
+  // הכפתור השמאלי מזיז את האינדקס לכיוון ימיני (מגדיל אינדקס)
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + imagePaths.length) % imagePaths.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % imagePaths.length);
   };
 
   const handleThumbnailClick = (index) => {
@@ -260,18 +262,18 @@ const EngineeringTestimonialsGallery = () => {
               </svg>
             </div>
             
-            {/* כפתורי ניווט */}
+            {/* כפתורי ניווט - עם התפקידים המעודכנים */}
             <button 
               onClick={handlePrev}
               className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 rounded-full p-2 text-primary-600 hover:bg-white hover:text-primary-700 transition-all duration-200 backdrop-blur-sm shadow-md hover:scale-110"
-              aria-label="המלצה קודמת"
+              aria-label="המלצה הבאה"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button 
               onClick={handleNext}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 rounded-full p-2 text-primary-600 hover:bg-white hover:text-primary-700 transition-all duration-200 backdrop-blur-sm shadow-md hover:scale-110"
-              aria-label="המלצה הבאה"
+              aria-label="המלצה קודמת"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -317,9 +319,9 @@ const EngineeringTestimonialsGallery = () => {
             ))}
           </div>
           
-          {/* מידע אודות מספר התמונה הנוכחית */}
+          {/* מידע אודות מספר התמונה הנוכחית - מסודר מימין לשמאל */}
           <div className="text-center mt-6 text-secondary-600">
-            <div className="inline-flex items-center gap-2">
+            <div className="inline-flex items-center gap-2 flex-row-reverse">
               {imagePaths.map((_, index) => (
                 <button
                   key={index}
@@ -352,7 +354,7 @@ const EngineeringTestimonialsGallery = () => {
             <h3 className="text-xl font-bold text-primary-800 mb-2 relative z-10">מרוצים מהשירות שלנו?</h3>
             <p className="text-primary-700 mb-4 relative z-10">נשמח לקבל גם מכם חוות דעת על השירות המקצועי שקיבלתם</p>
             <a 
-              href="https://wa.me/972548116482?text=אשמח%20להמליץ%20על%20השירות%20שלכם"
+              href="https://g.page/r/CeMXFUSbWvNdEAE/review"
               className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 relative z-10 shadow hover:shadow-lg hover:-translate-y-0.5"
             >
               <span className="mr-2">השאירו המלצה</span>

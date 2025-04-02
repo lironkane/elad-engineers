@@ -540,7 +540,7 @@ const EngineeringTestimonialsGallery = () => {
             <h3 className="text-xl font-bold text-primary-800 mb-2 relative z-10">מרוצים מהשירות שלנו?</h3>
             <p className="text-primary-700 mb-4 relative z-10">נשמח לקבל גם מכם חוות דעת על השירות המקצועי שקיבלתם</p>
             <a 
-              href="https://wa.me/972548116482?text=אשמח%20להמליץ%20על%20השירות%20שלכם"
+              href="https://g.page/r/CeMXFUSbWvNdEAE/review"
               className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 relative z-10 shadow hover:shadow-lg hover:-translate-y-0.5"
             >
               <span className="mr-2">השאירו המלצה</span>
