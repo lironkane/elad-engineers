@@ -151,11 +151,7 @@ const CtaSection = () => {
                       <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                     </a>
                     
-                    {/* Quick response badge */}
-                    <div className="flex items-center justify-center gap-3 mt-1 text-primary-700 bg-primary-50 px-5 py-3 rounded-lg border border-primary-100">
-                      <Zap className="w-4 h-4" />
-                      <span className="text-sm font-medium">מענה מהיר תוך 24 שעות</span>
-                    </div>
+
                   </motion.div>
                 </div>
               </div>
