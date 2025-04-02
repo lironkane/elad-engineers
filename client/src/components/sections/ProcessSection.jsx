@@ -75,7 +75,7 @@ const AnimatedClosingStatement = () => {
   );
 };
 
-// שלבי התהליך (הסרתי את הליווי מקצועי מתמשך)
+// שלבי התהליך
 const steps = [
   {
     icon: <Handshake className="w-12 h-12 text-primary-600" />,
@@ -214,7 +214,7 @@ const ProcessSection = () => {
               >
                 {/* חץ אופקי בין השלבים במסכים גדולים */}
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-24 right-0 w-full z-0 overflow-hidden">
+                  <div className="hidden md:block absolute top-16 right-0 w-full z-0 overflow-hidden">
                     <div className="flex items-center justify-center w-full">
                       <div className="h-1 bg-gradient-to-r from-primary-300 via-primary-400 to-primary-300 w-full" />
                       <motion.div
@@ -241,13 +241,6 @@ const ProcessSection = () => {
                     </motion.div>
                   </div>
                 )}
-
-                {/* מספר השלב */}
-                <div className="absolute -top-6 flex justify-center w-full">
-                  <div className="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-primary-200/50 z-20">
-                    {index + 1}
-                  </div>
-                </div>
 
                 {/* כרטיס שלב */}
                 <div className="bg-white w-full rounded-2xl p-8 relative z-10 group 
